@@ -1,0 +1,16 @@
+api_id = '1125067'
+api_hash = '8358d1d46b03c0111f6479ce111110b7'
+
+client = TelegramClient('xxx', api_id, api_hash).start()
+
+# get all the channels that I can access
+channels = {d.entity.username: d.entity
+            for d in client.get_dialogs()
+            if d.is_channel}
+
+# choose the one that I want list users from
+channel = channels[DealSalesItaly]
+
+# get all the users and print them
+for u in client.get_participants(channel):
+    print(u.id, u.first_name, u.last_name, u.username)
